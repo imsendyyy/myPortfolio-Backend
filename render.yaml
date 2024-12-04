@@ -8,7 +8,7 @@ services:
       - key: PORT
         value: "8080"
       - key: MONGO_URL
-        value: "mongodb+srv://admin38:<db_password>@imsendyyy.j3perrh.mongodb.net/?retryWrites=true&w=majority&appName=imsendyyy"
+        value: "mongodb+srv://admin38:MyAtlas@0321@imsendyyy.j3perrh.mongodb.net/myPortfolio?retryWrites=true&w=majority"
       - key: JWT_SECRET
         value: "myPortfolio6354190808"
       - key: CLOUDINARY_CLOUD_NAME
