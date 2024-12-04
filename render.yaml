@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: my-portfolio-backend
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: MONGO_URL
+        value: "mongodb://localhost:27017/myPortfolio"
+      - key: JWT_SECRET
+        value: "myPortfolio6354190808"
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "dnelnaisf"
+      - key: CLOUDINARY_API_KEY
+        value: "322279375931927"
+      - key: CLOUDINARY_API_SECRET
+        value: "FponjqcQF4Mxwj1wpaOctgNCfnc"
