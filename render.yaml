@@ -8,12 +8,12 @@ services:
       - key: PORT
         value: "8080"
       - key: MONGO_URL
-        value: "mongodb+srv://admin38:<your_Password>@imsendyyy.j3perrh.mongodb.net/myPortfolio?retryWrites=true&w=majority"
+        value: "mongodb+srv://admin38:<your_Password>j3perrh.mongodb.net/myPortfolio?retryWrites=true&w=majority"
       - key: JWT_SECRET
-        value: "myPortfolio6354190808"
+        value: "Your_JWT_Secret"
       - key: CLOUDINARY_CLOUD_NAME
-        value: "dnelnaisf"
+        value: "Cloudinary_Name"
       - key: CLOUDINARY_API_KEY
-        value: "322279375931927"
+        value: "Cloudinary_Key"
       - key: CLOUDINARY_API_SECRET
-        value: "FponjqcQF4Mxwj1wpaOctgNCfnc"
+        value: "Cloudinary_Secret"
