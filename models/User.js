@@ -8,11 +8,9 @@ const UserSchema = new mongoose.Schema({
     contactEmail : { type : String, required : true},
     location : { type : String},
     resume : { type : String},
-    socialLinks: {
-        github: { type: String },
-        linkedin: { type: String },
-        personalWebsite: { type: String },
-    },
+    github: { type: String },
+    linkedin: { type: String },
+    personalWebsite: { type: String },
     education: [
         {
             degree: { type: String, required: true },
