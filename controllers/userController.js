@@ -18,26 +18,26 @@ const getUserInfo = async(req, res) => {
 
 // Add or Update User Info 
 const upsertUserInfo = async (req, res) => {
-    const { name, title, bio, contactEmail, location, socialLinks, education } = req.body;
-
     try {
-        // Extract file URLs from Cloudinary upload
-        const profileImage = req.files?.profileImage?.[0]?.path; // Get profileImage URL
-        const resume = req.files?.resume?.[0]?.path; // Get resume URL
+        const { name, title, bio, contactEmail, location, socialLinks, education } = req.body;
 
-        let userInfo = await User.findOne(); // Find the existing user info
+        // Parse the 'education' field if it is a string
+        const parsedEducation = typeof education === 'string' ? JSON.parse(education) : education;
+
+        const profileImage = req.files?.profileImage?.[0]?.path;
+        const resume = req.files?.resume?.[0]?.path;
+
+        let userInfo = await User.findOne();
 
         if (userInfo) {
-            // Update the existing User Info
+            // Updating existing user info
             userInfo = await User.findByIdAndUpdate(
                 userInfo._id,
-                { name, title, bio, contactEmail, location, socialLinks, education, profileImage, resume },
+                { name, title, bio, contactEmail, location, socialLinks, education: parsedEducation, profileImage, resume },
                 { new: true }
             );
-
-            return res.status(200).json({ message: 'User Info updated successfully', userInfo });
         } else {
-            // Create new User Info
+            // Creating a new user info entry
             userInfo = new User({
                 name,
                 title,
@@ -45,19 +45,20 @@ const upsertUserInfo = async (req, res) => {
                 contactEmail,
                 location,
                 socialLinks,
-                education,
+                education: parsedEducation,
                 profileImage,
                 resume
             });
-
-            await userInfo.save(); // Save the new User Info
-            return res.status(200).json({ message: 'User Info created successfully', userInfo });
+            await userInfo.save();
         }
+
+        res.status(200).json(userInfo);
     } catch (error) {
-        console.error(error); // Log the error for debugging
+        console.error("Error while updating User Info:", error);
         res.status(500).json({ error: 'Server error while updating User Info' });
     }
 };
+
 
 
 
