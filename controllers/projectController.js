@@ -21,6 +21,8 @@ const addProject = async(req, res) => {
         }
         const newProject = new Project({
             ...req.body,
+            description: JSON.parse(description), 
+            techStack: JSON.parse(techStack),
             image: image,
         });
          await newProject.save();
@@ -37,6 +39,12 @@ const updateProject = async (req, res) => {
 
     try {
         let updatedFilds = { title, description, techStack, projectSummary, projectUrl, githubUrl, status }
+        if (req.body.description) {
+            updatedFields.description = JSON.parse(req.body.description);
+        }
+        if (req.body.techStack) {
+            updatedFields.techStack = JSON.parse(req.body.techStack);
+        }
         if(req.file){
             updatedFilds.image = req.file.path;
             console.log(req.file);
