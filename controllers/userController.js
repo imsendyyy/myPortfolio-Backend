@@ -22,7 +22,10 @@ const upsertUserInfo = async (req, res) => {
         const { name, title, bio, contactEmail, location, socialLinks, education } = req.body;
 
         // Parse the 'education' field if it is a string
-        const parsedEducation = typeof education === 'string' ? JSON.parse(education) : education;
+        const parsedEducation = typeof education === 'string' ? JSON.parse(education) : education;  
+
+        // Parse the 'socialLinks' field if it is a string
+        const parsedSocialLinks = typeof socialLinks === 'string' ? JSON.parse(socialLinks) : socialLinks;
 
         const profileImage = req.files?.profileImage?.[0]?.path;
         const resume = req.files?.resume?.[0]?.path;
@@ -33,7 +36,7 @@ const upsertUserInfo = async (req, res) => {
             // Updating existing user info
             userInfo = await User.findByIdAndUpdate(
                 userInfo._id,
-                { name, title, bio, contactEmail, location, socialLinks, education: parsedEducation, profileImage, resume },
+                { name, title, bio, contactEmail, location, socialLinks: parsedSocialLinks, education: parsedEducation, profileImage, resume },
                 { new: true }
             );
         } else {
