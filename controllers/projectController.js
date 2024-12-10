@@ -15,6 +15,7 @@ const getProjects = async(req, res) => {
 
 // add new project
 const addProject = async(req, res) => {
+    const { title, description, techStack, projectSummary, projectUrl, githubUrl, status } = req.body;
     try {
         let image = null
         if(req.file){
