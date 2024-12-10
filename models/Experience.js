@@ -20,11 +20,11 @@ const ExperienceSchema = new mongoose.Schema({
         type: Date 
     }, 
     description: { 
-        type: String 
+        type: [String], default: [] 
     }, 
-    technologies: [{ 
-        type: String 
-    }], 
+    technologies: { 
+        type: [String], default: []  
+    }, 
     imageUrl: { 
         type: String 
     }, 
