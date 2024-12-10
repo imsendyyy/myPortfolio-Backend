@@ -41,7 +41,7 @@ const updateProject = async (req, res) => {
     const { title, description, techStack, projectSummary, projectUrl, githubUrl, status } = req.body;
 
     try {
-        let updatedFilds = { title, description, techStack, projectSummary, projectUrl, githubUrl, status }
+        let updatedFields = { title, description, techStack, projectSummary, projectUrl, githubUrl, status }
         if (req.body.description) {
             updatedFields.description = JSON.parse(req.body.description);
         }
@@ -49,10 +49,10 @@ const updateProject = async (req, res) => {
             updatedFields.techStack = JSON.parse(req.body.techStack);
         }
         if(req.file){
-            updatedFilds.image = req.file.path;
+            updatedFields.image = req.file.path;
             console.log(req.file);
         }
-        const updatedProject = await Project.findByIdAndUpdate( id, updatedFilds, { new: true });
+        const updatedProject = await Project.findByIdAndUpdate( id, updatedFields, { new: true });
 
         if (!updatedProject) {
             return res.status(404).json({ error: 'Project not found' });
