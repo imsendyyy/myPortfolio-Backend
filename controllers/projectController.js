@@ -7,6 +7,7 @@ const getProjects = async(req, res) => {
         const projects = await Project.find();
         res.status(200).json(projects);
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Server Error While Getting Projects' });
     }
 }
@@ -28,6 +29,7 @@ const addProject = async(req, res) => {
          await newProject.save();
         res.status(200).json({ message: " New Project Created Successfully", project : newProject });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Server Error While Creatind New Project' });
     }
 }
@@ -57,6 +59,7 @@ const updateProject = async (req, res) => {
 
         res.status(200).json({ message: 'Project updated successfully', project: updatedProject });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: 'Failed to update project' });
     }
 };
@@ -73,6 +76,7 @@ const deleteProject = async(req, res) => {
         }
         res.status(200).json({ message : "Project Deleted Successfully"})
     } catch{
+        console.log(error)
         res.status(500).json({ error : "Server Error While Deleting Project"})
     }
 }
