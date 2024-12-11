@@ -20,10 +20,12 @@ const addNewBlog = async (req, res) => {
         if (req.file) {
             coverImageUrl = req.file.path; // Cloudinary stores the file path in `req.file.path`
         }
+         const tags = req.body.tags ? JSON.parse(req.body.tags) : [];
 
         // Create the new blog with the uploaded image URL if available
         const newBlog = new Blogs({
             ...req.body,
+            tags,
             coverImage: coverImageUrl, // Save the image URL
         });
 
@@ -40,11 +42,15 @@ const addNewBlog = async (req, res) => {
 //Update Exsiting Blog
 const updateBlog = async (req, res) => {
     const { id } = req.params;
-    const { title, content, author, tags, published, publishedAt } = req.body;
+    const { title, content, author, published, publishedAt } = req.body;
 
     try {
         // Check if a new cover image file is uploaded
-        let updatedFields = { title, content, author, tags, published, publishedAt };
+        let updatedFields = { title, content, author, published, publishedAt };
+        // Parse `tags` if provided
+        if (req.body.tags) {
+            updatedFields.tags = JSON.parse(req.body.tags);
+        }
         if (req.file) {
             updatedFields.coverImage = req.file.path; // New coverImage URL from Cloudinary
         }
